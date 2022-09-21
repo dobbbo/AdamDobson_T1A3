@@ -7,22 +7,41 @@
 # 6. Set up functions testing if the user has won or lost.
 
 # This is a temporary board that I will use to test code on. It will be filled with random values to simulate a game.
-board = [[0, 0, 2, 2], [2, 2, 2, 0], [4, 0, 0, 4], [0, 2, 0, 0]]
+board = [[0, 0, 2, 2], [2, 2, 2, 0], [4, 16, 2048, 4], [0, 2, 0, 32]]
 
 # We need to create a 'display' function that will display the board in a 4 * 4 grid in our terminal.
 def display():
-    #This loop will look through every row in the board.
+    # We must first find the largest value in our board so that we can appropriately size each of the cells. For example:
+    # As we can see below, the lines in the board do not line up as some values are long than others:
+    # | | |2048|2|
+    # |2|2|2| |
+    # |4|16| |4|
+    # | |2| |32|
+    # Our goal is for the board to look something like below. As we can see, 2048 is the largest number with 4 characters, therefore we want each of the cells to we 4 characters wide:
+    # |    |    |2048|   2|
+    # |   2|   2|   2|    |
+    # |   4|  16|    |   4|
+    # |    |   2|    |  32|
+    largest = board[0][0]
+    for row in board:
+        for cell in row:
+            if cell > largest:
+                largest = cell
+
+    number_of_spaces = len(str(largest))
+
+    # This loop will look through every row in the board.
     for row in board:
         # I would like the board to have vertical lines between each cell in the 4 * 4 grid.
         current_row = '|'
         # This loop will now look through each individual cell in the row.
         for cell in row:
-            # If the cell has a value of 0, I would like to display an empty space in the cell.
+            # If the cell has a value of 0, I would like the cell to be empty. However, it is important that the cell is still as wide as the largest number on the board, therefore we multiply the amount of empty spaces by 'number_of_spaces' (which contains the length of the largest number).
             if cell == 0:
-                current_row += ' |'
-            # If the cell has a value greater than 0, I would like to display the value in the cell. I would like to display this value as a string instead of an integer.
+                current_row += ' ' * number_of_spaces + '|'
+            # If the cell has a value greater than 0, I would like to display the value in the cell. I would like to display this value as a string instead of an integer. Again, it is important that the cell is equivalent in width to the largest number on the board. As our numbers can vary in length, we cannot simply add 'number_of_spaces' to our number, instead we must calculate the difference in characters between the largest number and the number in the cell. For example, if the largest number on the board is '2048' we must add 2 empty spaces to '16', or 3 empty spaces to '2', or 1 empty space to '128'. As such, we subtract the length of the number in our current cell from the largest number, then we multiply our empty spaces by the result of this calculation. Finally, we can add our current number to the cell.
             else:
-                current_row += str(cell) + '|'
+                current_row += (' ' * (number_of_spaces - len(str(cell)))) + str(cell) + '|'
         # I would now like to display the generated row.
         print(current_row)
     # We should also print an empty print statement to print an extra line.

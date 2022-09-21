@@ -9,6 +9,9 @@
 # This is a temporary board that I will use to test code on. It will be filled with random values to simulate a game.
 board = [[0, 0, 2, 2], [2, 2, 2, 0], [4, 16, 2048, 4], [0, 2, 0, 32]]
 
+# Board size will be 4 * 4, therefore we will set the 'board_size' variable to 4.
+board_size = 4
+
 # We need to create a 'display' function that will display the board in a 4 * 4 grid in our terminal.
 def display():
     # We must first find the largest value in our board so that we can appropriately size each of the cells. For example:
@@ -48,3 +51,29 @@ def display():
     print()
 
 display()
+
+# This function will merge one row to the left.
+def merge_one_row_left(row):
+    # We must first move everything within the row as far left as possible.
+    for i in range(board_size - 1):
+        for j in range(board_size - 1, 0, -1):
+            # We have to test whether or not there is an empty space to the left of each cell. If there is an empty space, then we shift to that space.
+            if row[j - 1] == 0:
+                row[j - 1] = row[j]
+                row[j] = 0
+
+    # Now we must actually merge the values.
+    for i in range(board_size - 1):
+        # Now we test if the value in the current cell is identical to the value to the left of the current cell. If it is, then we double the value of cell to the left, and make the current cell = 0.
+        if row[i] == row[i + 1]:
+            row[i] *= 2
+            row[i + 1] = 0
+    
+    # Move everything to the left again.
+    for i in range(board_size - 1, 0, -1):
+        if row[i - 1] == 0:
+            row[i - 1] = row[i]
+            row[i] = 0
+    return row
+    
+

@@ -76,4 +76,13 @@ def merge_one_row_left(row):
             row[i] = 0
     return row
     
+# Now that we can merge one row to the left, we need to now merge the whole board to the left.
+def merge_left(current_board):
+    # We need to use the 'merge_one_row_left' function on each row on the board.
+    for i in range(board_size):
+        current_board[i] = merge_one_row_left(current_board[i])
+    
+    return current_board
 
+merge_left(board)
+display()

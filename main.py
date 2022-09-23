@@ -1,6 +1,6 @@
 # Things to do:
 # 1. Set up board using a list of lists. Create a temporary board.
-# 2. Create functions that will merge left, right, up and down. Will create functions to reverse and transpose the list of lists to do this.
+# 2. Create functions that will merge left, right, up and down.
 # 3. Set up the start of the game, creating an empty gameboard filled with two random values.
 # 4. Set up the rounds of the game, where the user will have the option to merge in any one of the four directions, and after they move then new board will display.
 # 5. Set up adding a new value each time.
@@ -63,7 +63,7 @@ def merge_one_row_left(row):
                 row[j] = 0
 
     # Now we must actually merge the values.
-    for i in range(3):
+    for i in range(0, 3, 1):
         # Now we test if the value in the current cell is identical to the value to the left of the current cell. If it is, then we double the value of cell to the left, and make the current cell = 0.
         if row[i] == row[i + 1]:
             row[i] *= 2
@@ -90,17 +90,17 @@ def merge_one_row_right(row):
     # We must first move everything within the row as far left as possible.
     for i in range(3):
         for j in range(0, 3, 1):
-            # We have to test whether or not there is an empty space to the left of each cell. If there is an empty space, then we shift to that space.
+            # We have to test whether or not there is an empty space to the right of each cell. If there is an empty space, then we shift to that space.
             if row[j + 1] == 0:
                 row[j + 1] = row[j]
                 row[j] = 0
 
     # Now we must actually merge the values.
-    for i in range(3):
+    for i in range(3, 0, -1):
         # Now we test if the value in the current cell is identical to the value to the right of the current cell. If it is, then we double the value of cell to the right, and make the current cell = 0.
-        if row[i] == row[i + 1]:
+        if row[i] == row[i - 1]:
             row[i] *= 2
-            row[i + 1] = 0
+            row[i - 1] = 0
     
     # Move everything to the right again.
     for i in range(0, 3, 1):
@@ -119,8 +119,8 @@ def merge_right(current_board):
 
 
 
-merge_right(board)
+merge_left(board)
 display()
 
-merge_left(board)
+merge_right(board)
 display()

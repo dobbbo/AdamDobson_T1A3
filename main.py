@@ -170,3 +170,30 @@ def merge_down(current_board):
     current_board = transpose(current_board)
 
     return current_board
+
+game_over = False
+
+# Repeat asking the user for new moves while the game isn't over.
+while not game_over:
+    move = input("Which direction do you wish to merge? ")
+    
+    # We'll assume the user enters a valid input for now.
+    valid_input = True
+
+    # Figue out which direction the user wants to merge, and then use the correct function to merge in the respective direction.
+    if move == 'w':
+        board = merge_up(board)
+    elif move == 'a':
+        board = merge_left(board)
+    elif move == 's':
+        board = merge_down(board)
+    elif move == 'd':
+        board = merge_right(board)
+    else:
+        valid_input = False
+
+    # If the user did not enter either 'w', 'a', 's', or 'd' - their input is invalid, therefore we'll return the following.
+    if valid_input == False:
+        print("Your input was invalid. Please only enter 'w', 'a', 's' or 'd'. ")
+    else:
+        display()

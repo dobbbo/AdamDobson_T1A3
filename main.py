@@ -7,10 +7,10 @@
 # 6. Set up functions testing if the user has won or lost.
 
 # This is a temporary board that I will use to test code on. It will be filled with random values to simulate a game.
-board = [[0, 0, 2, 2], [2, 2, 2, 0], [4, 16, 2048, 4], [0, 2, 0, 32]]
+board = [[0, 0, 2, 2], [2, 2, 2, 0], [4, 0, 2048, 0], [0, 2, 0, 32]]
 
 # Board size will be 4 * 4, therefore we will set the 'board_size' variable to 4.
-board_size = 4
+# board_size = 4
 
 # We need to create a 'display' function that will display the board in a 4 * 4 grid in our terminal.
 def display():
@@ -55,22 +55,22 @@ display()
 # This function will merge one row to the left.
 def merge_one_row_left(row):
     # We must first move everything within the row as far left as possible.
-    for i in range(board_size - 1):
-        for j in range(board_size - 1, 0, -1):
+    for i in range(3):
+        for j in range(3, 0, -1):
             # We have to test whether or not there is an empty space to the left of each cell. If there is an empty space, then we shift to that space.
             if row[j - 1] == 0:
                 row[j - 1] = row[j]
                 row[j] = 0
 
     # Now we must actually merge the values.
-    for i in range(board_size - 1):
+    for i in range(3):
         # Now we test if the value in the current cell is identical to the value to the left of the current cell. If it is, then we double the value of cell to the left, and make the current cell = 0.
         if row[i] == row[i + 1]:
             row[i] *= 2
             row[i + 1] = 0
     
     # Move everything to the left again.
-    for i in range(board_size - 1, 0, -1):
+    for i in range(3, 0, -1):
         if row[i - 1] == 0:
             row[i - 1] = row[i]
             row[i] = 0
@@ -79,10 +79,48 @@ def merge_one_row_left(row):
 # Now that we can merge one row to the left, we need to now merge the whole board to the left.
 def merge_left(current_board):
     # We need to use the 'merge_one_row_left' function on each row on the board.
-    for i in range(board_size):
+    for i in range(4):
         current_board[i] = merge_one_row_left(current_board[i])
     
     return current_board
+
+
+# This function will merge one row to the right.
+def merge_one_row_right(row):
+    # We must first move everything within the row as far left as possible.
+    for i in range(3):
+        for j in range(0, 3, 1):
+            # We have to test whether or not there is an empty space to the left of each cell. If there is an empty space, then we shift to that space.
+            if row[j + 1] == 0:
+                row[j + 1] = row[j]
+                row[j] = 0
+
+    # Now we must actually merge the values.
+    for i in range(3):
+        # Now we test if the value in the current cell is identical to the value to the right of the current cell. If it is, then we double the value of cell to the right, and make the current cell = 0.
+        if row[i] == row[i + 1]:
+            row[i] *= 2
+            row[i + 1] = 0
+    
+    # Move everything to the right again.
+    for i in range(0, 3, 1):
+        if row[i + 1] == 0:
+            row[i + 1] = row[i]
+            row[i] = 0
+    return row
+    
+# Now that we can merge one row to the left, we need to now merge the whole board to the left.
+def merge_right(current_board):
+    # We need to use the 'merge_one_row_right' function on each row on the board.
+    for i in range(4):
+        current_board[i] = merge_one_row_right(current_board[i])
+    
+    return current_board
+
+
+
+merge_right(board)
+display()
 
 merge_left(board)
 display()

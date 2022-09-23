@@ -33,6 +33,13 @@ def add_new_value():
     # Fill the empty spot with the new value
     board[row_number][column_number] = new_value()
 
+# This function will test if the user has won the game (i.e. the user has achieved a value of 2048).
+def game_won():
+    for row in board:
+        if 2048 in row:
+            return True
+    return False
+
 for i in range(4):
     row = []
     for j in range(4):
@@ -171,14 +178,12 @@ def transpose(current_board):
 def merge_up(current_board):
     current_board = transpose(current_board)
     current_board = merge_left(current_board)
-    current_board = merge_left(current_board)
     current_board = transpose(current_board)
 
     return current_board
 
 def merge_down(current_board):
     current_board = transpose(current_board)
-    current_board = merge_right(current_board)
     current_board = merge_right(current_board)
     current_board = transpose(current_board)
 
@@ -209,5 +214,9 @@ while not game_over:
     if valid_input == False:
         print("Your input was invalid. Please only enter 'w', 'a', 's' or 'd'. ")
     else:
+        if game_won == True:
+            display()
+            print('Congratulations! You got 2048 and won the game!')
+            game_over = True
         add_new_value()
         display()

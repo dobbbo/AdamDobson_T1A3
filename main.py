@@ -7,7 +7,7 @@
 # 6. Set up functions testing if the user has won or lost.
 
 # This is a temporary board that I will use to test code on. It will be filled with random values to simulate a game.
-board = [[0, 2, 2, 2], [2, 2, 2, 0], [4, 0, 2048, 0], [32, 0, 32, 32]]
+board = [[0, 2, 2, 2], [2, 2, 2, 0], [2, 0, 2048, 0], [2, 0, 32, 32]]
 
 # Board size will be 4 * 4, therefore we will set the 'board_size' variable to 4.
 # board_size = 4
@@ -88,22 +88,22 @@ def merge_left(current_board):
 # This function will merge one row to the right.
 def merge_one_row_right(row):
     # We must first move everything within the row as far left as possible.
-    for i in range(4):
-        for j in range(0, 4, 1):
+    for i in range(3):
+        for j in range(0, 3, 1):
             # We have to test whether or not there is an empty space to the right of each cell. If there is an empty space, then we shift to that space.
             if row[j + 1] == 0:
                 row[j + 1] = row[j]
                 row[j] = 0
 
     # Now we must actually merge the values.
-    for i in range(4, 0, -1):
+    for i in range(3, 0, -1):
         # Now we test if the value in the current cell is identical to the value to the right of the current cell. If it is, then we double the value of cell to the right, and make the current cell = 0.
         if row[i] == row[i - 1]:
             row[i] *= 2
             row[i - 1] = 0
     
     # Move everything to the right again.
-    for i in range(0, 4, 1):
+    for i in range(0, 3, 1):
         if row[i + 1] == 0:
             row[i + 1] = row[i]
             row[i] = 0
@@ -125,7 +125,9 @@ def transpose(current_board):
                 temp = current_board[i][j]
                 current_board[i][j] = current_board[j][i]
                 current_board[j][i] = temp
+
     return current_board
+    
 
 def merge_up(current_board):
     current_board = transpose(current_board)
@@ -135,6 +137,14 @@ def merge_up(current_board):
 
     return current_board
 
-merge_up(board)
+def merge_down(current_board):
+    current_board = transpose(current_board)
+    current_board = merge_right(current_board)
+    current_board = merge_right(current_board)
+    current_board = transpose(current_board)
+
+    return current_board
+
+merge_down(board)
 display()
 

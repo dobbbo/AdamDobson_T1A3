@@ -20,6 +20,19 @@ def new_value():
     else:
         return 2
 
+# This function will add a value to one of the random empty spaces on the board.
+def add_new_value():
+    row_number = random.randint(0, 3)
+    column_number = random.randint(0, 3)
+
+    # This function will continually scan through random spots until it finds one that is empty, then it will add the new number to the empty spot.
+    while not board[row_number][column_number] == 0:
+        row_number = random.randint(0, 3)
+        column_number = random.randint(0, 3)
+    
+    # Fill the empty spot with the new value
+    board[row_number][column_number] = new_value()
+
 for i in range(4):
     row = []
     for j in range(4):
@@ -196,4 +209,5 @@ while not game_over:
     if valid_input == False:
         print("Your input was invalid. Please only enter 'w', 'a', 's' or 'd'. ")
     else:
+        add_new_value()
         display()

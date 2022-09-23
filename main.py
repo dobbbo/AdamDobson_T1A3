@@ -130,6 +130,7 @@ def transpose(current_board):
 def merge_up(current_board):
     current_board = transpose(current_board)
     current_board = merge_left(current_board)
+    current_board = merge_left(current_board)
     current_board = transpose(current_board)
 
     return current_board

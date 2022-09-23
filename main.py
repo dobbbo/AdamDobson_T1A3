@@ -6,11 +6,37 @@
 # 5. Set up adding a new value each time.
 # 6. Set up functions testing if the user has won or lost.
 
-# This is a temporary board that I will use to test code on. It will be filled with random values to simulate a game.
-board = [[0, 2, 2, 2], [2, 2, 2, 0], [2, 0, 2048, 0], [2, 0, 32, 32]]
+import random
 
-# Board size will be 4 * 4, therefore we will set the 'board_size' variable to 4.
-# board_size = 4
+# Blank board at the start of game.
+board = []
+
+# This function generates a new value of 2 or 4 on the board in between each move.
+def new_value():
+    # Using the random module to return a 4 once every 10 moves.
+    if random.randint(1, 10) == 1:
+        return 4
+    # Therefore, 9 out of 10 moves will add a value of 2 to the board, but on the 10th move a 4 will be added instead.
+    else:
+        return 2
+
+for i in range(4):
+    row = []
+    for j in range(4):
+        row.append(0)
+    board.append(row)
+
+# At the start of the game we need to fill the board with two values.
+values_added = 2
+while values_added > 0:
+    row_number = random.randint(0, 3)
+    column_number = random.randint(0, 3)
+
+    if board[row_number][column_number] == 0:
+        board[row_number][column_number] = new_value()
+        values_added -= 1
+    
+print("Welcome to 2048! Use 'w' to merge up, 'a' to merge left, 's' to merge down and 'd' to merge right.")
 
 # We need to create a 'display' function that will display the board in a 4 * 4 grid in our terminal.
 def display():
@@ -144,7 +170,3 @@ def merge_down(current_board):
     current_board = transpose(current_board)
 
     return current_board
-
-merge_down(board)
-display()
-

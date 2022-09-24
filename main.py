@@ -20,23 +20,31 @@ def new_value():
     else:
         return 2
 
+# This function will add a value to one of the random empty spaces on the board.
+def add_new_value():
+    row_number = random.randint(0, 3)
+    column_number = random.randint(0, 3)
+
+    # This function will continually scan through random spots until it finds one that is empty, then it will add the new number to the empty spot.
+    while not board[row_number][column_number] == 0:
+        row_number = random.randint(0, 3)
+        column_number = random.randint(0, 3)
+    
+    # Fill the empty spot with the new value
+    board[row_number][column_number] = new_value()
+
+# This function will test if the user has won the game (i.e. the user has achieved a value of 2048).
+def game_won():
+    for row in board:
+        if 2048 in row:
+            return True
+    return False
+
 for i in range(4):
     row = []
     for j in range(4):
         row.append(0)
     board.append(row)
-
-# At the start of the game we need to fill the board with two values.
-values_added = 2
-while values_added > 0:
-    row_number = random.randint(0, 3)
-    column_number = random.randint(0, 3)
-
-    if board[row_number][column_number] == 0:
-        board[row_number][column_number] = new_value()
-        values_added -= 1
-    
-print("Welcome to 2048! Use 'w' to merge up, 'a' to merge left, 's' to merge down and 'd' to merge right.")
 
 # We need to create a 'display' function that will display the board in a 4 * 4 grid in our terminal.
 def display():
@@ -76,8 +84,6 @@ def display():
     # We should also print an empty print statement to print an extra line.
     print()
 
-display()
-
 # This function will merge one row to the left.
 def merge_one_row_left(row):
     # We must first move everything within the row as far left as possible.
@@ -110,7 +116,6 @@ def merge_left(current_board):
     
     return current_board
 
-
 # This function will merge one row to the right.
 def merge_one_row_right(row):
     # We must first move everything within the row as far left as possible.
@@ -134,7 +139,7 @@ def merge_one_row_right(row):
             row[i + 1] = row[i]
             row[i] = 0
     return row
-    
+
 # Now that we can merge one row to the left, we need to now merge the whole board to the left.
 def merge_right(current_board):
     # We need to use the 'merge_one_row_right' function on each row on the board.
@@ -154,10 +159,8 @@ def transpose(current_board):
 
     return current_board
     
-
 def merge_up(current_board):
     current_board = transpose(current_board)
-    current_board = merge_left(current_board)
     current_board = merge_left(current_board)
     current_board = transpose(current_board)
 
@@ -166,10 +169,23 @@ def merge_up(current_board):
 def merge_down(current_board):
     current_board = transpose(current_board)
     current_board = merge_right(current_board)
-    current_board = merge_right(current_board)
     current_board = transpose(current_board)
 
     return current_board
+
+# At the start of the game we need to fill the board with two values.
+values_added = 2
+while values_added > 0:
+    row_number = random.randint(0, 3)
+    column_number = random.randint(0, 3)
+
+    if board[row_number][column_number] == 0:
+        board[row_number][column_number] = new_value()
+        values_added -= 1
+    
+print("Welcome to 2048! Use 'w' to merge up, 'a' to merge left, 's' to merge down and 'd' to merge right.")
+
+display()
 
 game_over = False
 
@@ -196,4 +212,9 @@ while not game_over:
     if valid_input == False:
         print("Your input was invalid. Please only enter 'w', 'a', 's' or 'd'. ")
     else:
+        if game_won == True:
+            display()
+            print('Congratulations! You got 2048 and won the game!')
+            game_over = True
+        add_new_value()
         display()

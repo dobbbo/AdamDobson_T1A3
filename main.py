@@ -170,6 +170,7 @@ def merge_down(current_board):
 
 # <-- Now that we have all functions defined above, we can now use those functions to create the flow of operations to get our our 2048 game working (see below). -->
 
+# This will initially fill the board with 0's in all cells (please not that in the final ver)
 for i in range(4):
     row = []
     for j in range(4):

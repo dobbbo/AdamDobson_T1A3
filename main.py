@@ -218,6 +218,3 @@ while not game_over:
             game_over = True
         add_new_value()
         display()
-
-#test
-

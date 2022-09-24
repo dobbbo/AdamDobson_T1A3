@@ -10,6 +10,8 @@ import random
 # Blank board at the start of game.
 board = []
 
+# <-- All function definitions have been placed here at the top of the document. -->
+
 # This function generates a new value of 2 or 4 on the board in between each move.
 def new_value():
     # Using the random module to return a 4 once every 10 moves.
@@ -38,12 +40,6 @@ def game_won():
         if 2048 in row:
             return True
     return False
-
-for i in range(4):
-    row = []
-    for j in range(4):
-        row.append(0)
-    board.append(row)
 
 # We need to create a 'display' function that will display the board in a 4 * 4 grid in our terminal.
 def display():
@@ -106,7 +102,7 @@ def merge_one_row_left(row):
             row[i - 1] = row[i]
             row[i] = 0
     return row
-    
+
 # Now that we can merge one row to the left, we need to now merge the whole board to the left.
 def merge_left(current_board):
     # We need to use the 'merge_one_row_left' function on each row on the board.
@@ -171,6 +167,14 @@ def merge_down(current_board):
     current_board = transpose(current_board)
 
     return current_board
+
+# <-- Now that we have all functions defined above, we can now use those functions to create the flow of operations to get our our 2048 game working (see below). -->
+
+for i in range(4):
+    row = []
+    for j in range(4):
+        row.append(0)
+    board.append(row)
 
 # At the start of the game we need to fill the board with two values.
 values_added = 2

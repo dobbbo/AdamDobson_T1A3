@@ -47,6 +47,13 @@ def game_won():
             return True
     return False
 
+def game_lost():
+    for row in board:
+        if not 0 in row:
+            return True
+    return False
+
+
 # We need to create a 'display' function that will display the board in a 4 * 4 grid in our terminal.
 def display():
     # We must first find the largest value in our board so that we can appropriately size each of the cells. For example:
@@ -218,6 +225,10 @@ while not game_over:
         if game_won() is True:
             display()
             print('Congratulations! You got 2048 and won the game!')
+            game_over = True
+        elif game_lost() is True:
+            display()
+            print('Sorry, you have lost the game.')
             game_over = True
         add_new_value()
         display()

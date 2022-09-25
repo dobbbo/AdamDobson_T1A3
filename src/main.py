@@ -22,7 +22,7 @@ for i in range(4):
 def new_value():
     # Using the random module to return a 4 once every 10 moves.
     if random.randint(1, 10) == 1:
-        return 2048
+        return 4
     # Therefore, 9 out of 10 moves will add a value of 2 to the board, but on the 10th move a 4 will be added instead.
     else:
         return 2
@@ -46,13 +46,6 @@ def game_won():
         if 2048 in row:
             return True
     return False
-
-def game_lost():
-    for row in board:
-        if not 0 in row:
-            return True
-    return False
-
 
 # We need to create a 'display' function that will display the board in a 4 * 4 grid in our terminal.
 def display():
@@ -225,10 +218,6 @@ while not game_over:
         if game_won() is True:
             display()
             print('Congratulations! You got 2048 and won the game!')
-            game_over = True
-        elif game_lost() is True:
-            display()
-            print('Sorry, you have lost the game.')
             game_over = True
         add_new_value()
         display()

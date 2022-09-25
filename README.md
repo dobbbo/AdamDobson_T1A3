@@ -2,10 +2,12 @@
 
 ## [GitHub Repository](https://github.com/dobbbo/AdamDobson_T1A3)
 
+## 
+
 ## Features:
-### Feature 1.
-### Feature 2.
-### Feature 3.
+### 1. Fully Interactive User Experience and Controls
+### 2. Visual Depiction of Game Board
+### 3. Random Placement and Generation of Numbers
 
 ## Implementation Plan
 

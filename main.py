@@ -9,6 +9,12 @@ import random
 
 # Blank board at the start of game.
 board = []
+# This will initially fill the board with 0's in all cells. (Please note that all cells containing 0's will appear as blank spaces in the final game - refer to the 'display()' function.)
+for i in range(4):
+    row = []
+    for j in range(4):
+        row.append(0)
+    board.append(row)
 
 # <-- All function definitions have been placed here at the top of the document. -->
 
@@ -16,7 +22,7 @@ board = []
 def new_value():
     # Using the random module to return a 4 once every 10 moves.
     if random.randint(1, 10) == 1:
-        return 4
+        return 2048
     # Therefore, 9 out of 10 moves will add a value of 2 to the board, but on the 10th move a 4 will be added instead.
     else:
         return 2
@@ -46,12 +52,12 @@ def display():
     # We must first find the largest value in our board so that we can appropriately size each of the cells. For example:
     # As we can see below, the lines in the board do not line up as some values are long than others:
     # | | |2048|2|
-    # |2|2|2| |
+    # |128|2|2|256|
     # |4|16| |4|
     # | |2| |32|
     # Our goal is for the board to look something like below. As we can see, 2048 is the largest number with 4 characters, therefore we want each of the cells to we 4 characters wide:
     # |    |    |2048|   2|
-    # |   2|   2|   2|    |
+    # | 128|   2|   2| 256|
     # |   4|  16|    |   4|
     # |    |   2|    |  32|
     largest = board[0][0]
@@ -170,13 +176,6 @@ def merge_down(current_board):
 
 # <-- Now that we have all functions defined above, we can now use those functions to create the flow of operations to get our our 2048 game working (see below). -->
 
-# This will initially fill the board with 0's in all cells (please not that in the final ver)
-for i in range(4):
-    row = []
-    for j in range(4):
-        row.append(0)
-    board.append(row)
-
 # At the start of the game we need to fill the board with two values.
 values_added = 2
 while values_added > 0:
@@ -216,7 +215,7 @@ while not game_over:
     if valid_input == False:
         print("Your input was invalid. Please only enter 'w', 'a', 's' or 'd'. ")
     else:
-        if game_won == True:
+        if game_won() is True:
             display()
             print('Congratulations! You got 2048 and won the game!')
             game_over = True

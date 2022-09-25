@@ -2,6 +2,8 @@
 
 ## [GitHub Repository](https://github.com/dobbbo/AdamDobson_T1A3)
 
+## [Video Presentation](https://www.youtube.com/watch?v=IR3VuNj13RM)
+
 ## **Style Guide**
 
 Throughout the development of this program, I adhered to the styling conventions listed in the **PEP 8** style guide while writing my Python code. Referenced below is the PEP 8 style guide:
@@ -111,7 +113,20 @@ Through the utilisation of the random module, between each move this application
 ### Screenshot of Trello board towards the end of development:
 ![Towards end of Trello board.](docs/end_of_trello.png)
 
-## **Instructions**
+## **References:**
 
+- GeeksforGeeks. (2020). 2048 Game in Python. [online] Available at: https://www.geeksforgeeks.org/2048-game-in-python/.
+- Team, T. (2022). Learn How to Create 2048 Game in Python. [online] TechVidvan. Available at: https://techvidvan.com/tutorials/python-2048-game-project-with-source-code/.
+- Team, D. (2021). Create 2048 Game in Python. [online] DataFlair. Available at: https://data-flair.training/blogs/python-2048-game/.
+- Chhabra, B. (2020). How to build 2048 game in Python. [online] CodeSpeedy. Available at: https://www.codespeedy.com/how-to-build-2048-game-in-python/.
+- Geeks, P. (2022). Create 2048 Game using Python. [online] Python Geeks. Available at: https://pythongeeks.org/python-2048-game-source-code/.
 
-## **References**
+‌
+
+‌
+
+‌
+
+‌
+
+‌

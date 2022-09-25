@@ -47,18 +47,6 @@ def game_won():
             return True
     return False
 
-def game_lost():
-    temporary_board = merge_up(board)
-    if temporary_board == board:
-        temporary_board = merge_right(board)
-        if temporary_board == board:
-            temporary_board = merge_left(board)
-            if temporary_board == board:
-                temporary_board = merge_down(board)
-                if temporary_board == board:
-                    return True
-    return False
-
 # We need to create a 'display' function that will display the board in a 4 * 4 grid in our terminal.
 def display():
     # We must first find the largest value in our board so that we can appropriately size each of the cells. For example:
@@ -233,7 +221,3 @@ while not game_over:
             game_over = True
         add_new_value()
         display()
-
-        if game_lost() is True:
-            print("Sorry, you lost the game")
-            game_over = True
